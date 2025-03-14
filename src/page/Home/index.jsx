@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 import { useEffect, useState, useRef } from "react";
 import "./style.css";
 import { FaTrash } from "react-icons/fa";
@@ -14,24 +15,18 @@ function Home() {
     const usersFromApi = await Api.get('/usuarios')
 
     setUsers(usersFromApi.data)
-    console.log(users)
+   
   }
 
   async function creatUsers() {
-     try {
-      const value =
-      await Api.post('/usuarios',{
-        name: inputName.current.value,
-        age: inputAge.current.value,
-        email: inputEmail.current.value,
-       })
-       console.log(value)
-     } catch (error) {
-      console.log(error)
-     }
    
-     
-    console.log(inputName)
+    await Api.post('/usuarios', {
+      name: inputName.current.value,
+      age: parseInt(inputAge.current.value),
+      email: inputEmail.current.value
+    })
+
+   
     getUsers()
   }
 
