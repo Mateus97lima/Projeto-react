@@ -24,11 +24,19 @@ function Home() {
       name: inputName.current.value,
       age: parseInt(inputAge.current.value),
       email: inputEmail.current.value
-    })
+    });
+    
 
    
     getUsers()
   }
+  async function deleteUsers(id) {
+   await Api.delete(`/usuarios/${id}`)
+
+   
+   getUsers()
+  }
+  
 
   useEffect(() => {
     getUsers()
@@ -57,7 +65,7 @@ function Home() {
               E-mail: <span>{user.email}</span>
             </p>
           </div>
-          <button className="icon-btn" >
+          <button className="icon-btn" onClick={() => deleteUsers(user.id)} >
             <FaTrash size={24} color="black" />
           </button>
         </div>
